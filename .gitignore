@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+instance/
+*.db
+*.sqlite
+*.pyc
+
+# Node
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.production
+.env.development
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment variables
+backend/.env
+frontend/.env
+
+# Build artifacts
+*.egg-info/
+.eggs/
+pip-log.txt
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Deployment
+.vercel
+.netlify
+
