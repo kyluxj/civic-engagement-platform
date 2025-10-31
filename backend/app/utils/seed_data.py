@@ -19,7 +19,6 @@ def seed_database():
     # Create sample organization
     org = Organization(
         name='Sample Organization',
-        description='A sample civic organization for demonstration',
         compliance_status='compliant',
         created_at=datetime.utcnow()
     )
