@@ -36,7 +36,7 @@ def create_app(config_name='development'):
         db.create_all()
         
         # Seed initial data if database is empty
-        from app.models.user import User
+        from app.models import User
         if User.query.count() == 0:
             from app.utils.seed_data import seed_database
             seed_database()
