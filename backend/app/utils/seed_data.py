@@ -10,7 +10,7 @@ def seed_database():
     # Create admin user
     admin = User(
         email='admin@example.com',
-        name='Admin User',
+        full_name='Admin User',
         role='super_admin'
     )
     admin.set_password('admin123')
