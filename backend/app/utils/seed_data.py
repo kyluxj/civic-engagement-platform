@@ -1,7 +1,5 @@
 """Database seeding utility."""
-from app.models import db
-from app.models.user import User
-from app.models.organization import Organization
+from app.models import db, User, Organization
 from datetime import datetime
 
 
