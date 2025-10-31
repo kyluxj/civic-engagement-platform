@@ -18,8 +18,10 @@ def seed_database():
     
     # Create sample organization
     org = Organization(
-        name='Sample Organization',
-        compliance_status='compliant',
+       name="Sample Organization",
+       type="Healthcare",  # <-- add this
+       is_active=True,
+       compliance_status="compliant"
         created_at=datetime.utcnow()
     )
     db.session.add(org)
