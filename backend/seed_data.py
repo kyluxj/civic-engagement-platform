@@ -12,7 +12,7 @@ with app.app_context():
         try:
             # Create demo organization
             org = Organization(
-                name='Demo NGO',
+                full_name='Demo NGO',
                 type='ngo',
                 registration_number='NGO-2024-001',
                 contact_email='contact@demo-ngo.org',
