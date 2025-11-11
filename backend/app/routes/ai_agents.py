@@ -292,11 +292,12 @@ def handle_recommendations():
             return jsonify({'error': result.get('error', 'AI generation failed')}), 500
         
         # Save recommendation
+        import json
         recommendation = AIRecommendation(
             campaign_id=campaign.id,
             agent_type=data['agent_type'],
             prompt=data['prompt'],
-            recommendation=result.get('recommendation', ''),
+            recommendation=json.dumps(result.get('recommendations', result)),
             status='pending_review'
         )
         
