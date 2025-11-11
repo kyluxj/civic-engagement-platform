@@ -2,7 +2,7 @@
  * API service for backend communication
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://civic-platform-api.onrender.com';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://civic-platform-api.onrender.com';
 
 class ApiService {
   constructor() {
