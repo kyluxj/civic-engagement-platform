@@ -206,6 +206,26 @@ class ApiService {
     });
   }
 
+  // AI Recommendations endpoints
+  async getRecommendations(params = {}) {
+    const query = new URLSearchParams(params).toString();
+    return this.request(`/api/ai/recommendations?${query}`);
+  }
+
+  async requestRecommendation(data) {
+    return this.request('/api/ai/recommendations', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async reviewRecommendation(recommendationId, reviewData) {
+    return this.request(`/api/ai/recommendations/${recommendationId}/review`, {
+      method: 'PUT',
+      body: JSON.stringify(reviewData),
+    });
+  }
+
   async getRecommendation(recommendationId) {
     return this.request(`/api/ai/recommendations/${recommendationId}`);
   }
