@@ -11,7 +11,7 @@ def role_required(*allowed_roles):
         @wraps(fn)
         def wrapper(*args, **kwargs):
             verify_jwt_in_request()
-            user_id = get_jwt_identity()
+            user_id = int(get_jwt_identity())
             user = db.session.get(User, user_id)
             
             if not user:
@@ -30,7 +30,7 @@ def role_required(*allowed_roles):
 
 def get_current_user():
     """Get current authenticated user."""
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     return db.session.get(User, user_id)
 
 
