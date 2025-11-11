@@ -24,22 +24,18 @@ def create_app(config_name='development'):
     from app.routes.organizations import organizations_bp
     from app.routes.campaigns import campaigns_bp
     from app.routes.ai_agents import ai_bp
+    from app.routes.init_db import init_bp
     
     app.register_blueprint(auth_bp)
     app.register_blueprint(users_bp)
     app.register_blueprint(organizations_bp)
     app.register_blueprint(campaigns_bp)
     app.register_blueprint(ai_bp)
+    app.register_blueprint(init_bp)
     
-    # Create database tables and seed data
+    # Create database tables
     with app.app_context():
         db.create_all()
-        
-        # Seed initial data if database is empty
-        from app.models import User
-        if User.query.count() == 0:
-            from app.utils.seed_data import seed_database
-            seed_database()
     
     # Health check endpoint
     @app.route('/health')
