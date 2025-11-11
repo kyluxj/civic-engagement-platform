@@ -59,11 +59,11 @@ export default function AIAgentsPage() {
     try {
       setLoading(true);
       const [recsRes, campaignsRes] = await Promise.all([
-        api.get('/api/ai/recommendations'),
-        api.get('/api/campaigns')
+        api.getRecommendations(),
+        api.getCampaigns()
       ]);
-      setRecommendations(recsRes.data.recommendations || []);
-      setCampaigns(campaignsRes.data.campaigns || []);
+      setRecommendations(recsRes.recommendations || []);
+      setCampaigns(campaignsRes.campaigns || []);
     } catch (err) {
       setError('Failed to load data');
       console.error(err);
@@ -79,7 +79,7 @@ export default function AIAgentsPage() {
     setRequesting(true);
 
     try {
-      await api.post('/api/ai/recommendations', requestForm);
+      await api.requestRecommendation(requestForm);
       setSuccess('AI recommendation requested successfully');
       fetchData();
       handleCloseRequestModal();
@@ -96,7 +96,7 @@ export default function AIAgentsPage() {
     setSuccess('');
 
     try {
-      await api.put(`/api/ai/recommendations/${selectedRecommendation.id}/review`, reviewForm);
+      await api.reviewRecommendation(selectedRecommendation.id, reviewForm);
       setSuccess('Recommendation reviewed successfully');
       fetchData();
       handleCloseReviewModal();
