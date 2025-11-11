@@ -32,11 +32,11 @@ export default function CampaignsPage() {
     try {
       setLoading(true);
       const [campaignsRes, orgsRes] = await Promise.all([
-        api.get('/api/campaigns'),
-        api.get('/api/organizations')
+        api.getCampaigns(),
+        api.getOrganizations()
       ]);
-      setCampaigns(campaignsRes.data.campaigns || []);
-      setOrganizations(orgsRes.data.organizations || []);
+      setCampaigns(campaignsRes.campaigns || []);
+      setOrganizations(orgsRes.organizations || []);
     } catch (err) {
       setError('Failed to load data');
       console.error(err);
@@ -52,10 +52,10 @@ export default function CampaignsPage() {
 
     try {
       if (editingCampaign) {
-        await api.put(`/api/campaigns/${editingCampaign.id}`, formData);
+        await api.updateCampaign(editingCampaign.id, formData);
         setSuccess('Campaign updated successfully');
       } else {
-        await api.post('/api/campaigns', formData);
+        await api.createCampaign(formData);
         setSuccess('Campaign created successfully');
       }
       
@@ -72,7 +72,7 @@ export default function CampaignsPage() {
     }
 
     try {
-      await api.delete(`/api/campaigns/${id}`);
+      await api.deleteCampaign(id);
       setSuccess('Campaign deleted successfully');
       fetchData();
     } catch (err) {

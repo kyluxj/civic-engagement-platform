@@ -27,8 +27,8 @@ export default function OrganizationsPage() {
   const fetchOrganizations = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/api/organizations');
-      setOrganizations(response.data.organizations || []);
+      const response = await api.getOrganizations();
+      setOrganizations(response.organizations || []);
     } catch (err) {
       setError('Failed to load organizations');
       console.error(err);
@@ -44,10 +44,10 @@ export default function OrganizationsPage() {
 
     try {
       if (editingOrg) {
-        await api.put(`/api/organizations/${editingOrg.id}`, formData);
+        await api.updateOrganization(editingOrg.id, formData);
         setSuccess('Organization updated successfully');
       } else {
-        await api.post('/api/organizations', formData);
+        await api.createOrganization(formData);
         setSuccess('Organization created successfully');
       }
       
@@ -64,7 +64,7 @@ export default function OrganizationsPage() {
     }
 
     try {
-      await api.delete(`/api/organizations/${id}`);
+      await api.deleteOrganization(id);
       setSuccess('Organization deleted successfully');
       fetchOrganizations();
     } catch (err) {
