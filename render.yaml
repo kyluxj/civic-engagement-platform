@@ -19,15 +19,14 @@ services:
       - key: OPENAI_API_KEY
         sync: false
       - key: DATABASE_URL
-        fromDatabase:
-          name: civic-platform-db
-          property: connectionString
+        value: postgresql://neondb_owner:npg_nt3FNyb6qpud@ep-withered-recipe-a4ao69r1-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require
 
-databases:
-  # PostgreSQL Database
-  - name: civic-platform-db
-    databaseName: civic_platform
-    user: civic_user
-    region: oregon
-    plan: free
+# Render PostgreSQL database removed - now using Neon database
+# databases:
+#   # PostgreSQL Database
+#   - name: civic-platform-db
+#     databaseName: civic_platform
+#     user: civic_user
+#     region: oregon
+#     plan: free
 
