@@ -1,38 +1,5 @@
-"""AI Agent services using Hugging Face."""
-import os
-import requests
+"""AI Agent services using demo data."""
 from datetime import datetime
-import json
-
-# Hugging Face API configuration
-HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
-HF_API_KEY = os.environ.get('HUGGINGFACE_API_KEY', '')
-
-
-def query_huggingface(prompt, max_tokens=2000):
-    """Query Hugging Face Inference API."""
-    headers = {"Authorization": f"Bearer {HF_API_KEY}"} if HF_API_KEY else {}
-    
-    payload = {
-        "inputs": prompt,
-        "parameters": {
-            "max_new_tokens": max_tokens,
-            "temperature": 0.7,
-            "return_full_text": False
-        }
-    }
-    
-    try:
-        response = requests.post(HF_API_URL, headers=headers, json=payload, timeout=30)
-        response.raise_for_status()
-        result = response.json()
-        
-        if isinstance(result, list) and len(result) > 0:
-            return result[0].get('generated_text', '')
-        return str(result)
-    except Exception as e:
-        print(f"Hugging Face API error: {e}")
-        return None
 
 
 class NarrativeArchitect:
@@ -53,7 +20,7 @@ class NarrativeArchitect:
             Dict containing narrative recommendations
         """
         
-        # Always return demo data for reliable functionality
+        # Return demo data for reliable functionality
         return {
             'success': True,
             'agent_type': 'narrative_architect',
@@ -240,3 +207,22 @@ class FeedbackIntelligence:
             'model_used': 'demo-mode',
             'demo_mode': True
         }
+
+
+def get_ai_agent(agent_type):
+    """
+    Get AI agent instance by type.
+    
+    Args:
+        agent_type: Type of AI agent ('narrative_architect', 'content_synthesizer', etc.)
+    
+    Returns:
+        AI agent class
+    """
+    agents = {
+        'narrative_architect': NarrativeArchitect,
+        'content_synthesizer': ContentSynthesizer,
+        'distribution_optimizer': DistributionOptimizer,
+        'feedback_intelligence': FeedbackIntelligence
+    }
+    return agents.get(agent_type)
